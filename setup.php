@@ -1,34 +1,32 @@
 <?php
 
-define( 'DVWA_WEB_PAGE_TO_ROOT', '' );
-require_once DVWA_WEB_PAGE_TO_ROOT . 'dvwa/includes/dvwaPage.inc.php';
+define('DVWA_WEB_PAGE_TO_ROOT', '');
+require_once DVWA_WEB_PAGE_TO_ROOT . 'mmva/includes/dvwaPage.inc.php';
 
-dvwaPageStartup( array( ) );
+dvwaPageStartup(array());
 
 $page = dvwaPageNewGrab();
-$page[ 'title' ]   = 'Setup' . $page[ 'title_separator' ].$page[ 'title' ];
-$page[ 'page_id' ] = 'setup';
+$page['title'] = 'Setup' . $page['title_separator'] . $page['title'];
+$page['page_id'] = 'setup';
 
-if( isset( $_POST[ 'create_db' ] ) ) {
+if (isset($_POST['create_db'])) {
 	// Anti-CSRF
-	if (array_key_exists ("session_token", $_SESSION)) {
-		$session_token = $_SESSION[ 'session_token' ];
+	if (array_key_exists("session_token", $_SESSION)) {
+		$session_token = $_SESSION['session_token'];
 	} else {
 		$session_token = "";
 	}
 
-	checkToken( $_REQUEST[ 'user_token' ], $session_token, 'setup.php' );
+	checkToken($_REQUEST['user_token'], $session_token, 'setup.php');
 
-	if( $DBMS == 'MySQL' ) {
-		include_once DVWA_WEB_PAGE_TO_ROOT . 'dvwa/includes/DBMS/MySQL.php';
-	}
-	elseif($DBMS == 'PGSQL') {
-		// include_once DVWA_WEB_PAGE_TO_ROOT . 'dvwa/includes/DBMS/PGSQL.php';
-		dvwaMessagePush( 'PostgreSQL is not yet fully supported.' );
+	if ($DBMS == 'MySQL') {
+		include_once DVWA_WEB_PAGE_TO_ROOT . 'mmva/includes/DBMS/MySQL.php';
+	} elseif ($DBMS == 'PGSQL') {
+		// include_once DVWA_WEB_PAGE_TO_ROOT . 'mmva/includes/DBMS/PGSQL.php';
+		dvwaMessagePush('PostgreSQL is not yet fully supported.');
 		dvwaPageReload();
-	}
-	else {
-		dvwaMessagePush( 'ERROR: Invalid database selected. Please review the config file syntax.' );
+	} else {
+		dvwaMessagePush('ERROR: Invalid database selected. Please review the config file syntax.');
 		dvwaPageReload();
 	}
 }
@@ -37,9 +35,9 @@ if( isset( $_POST[ 'create_db' ] ) ) {
 generateSessionToken();
 
 $database_type_name = "Unknown - The site is probably now broken";
-if( $DBMS == 'MySQL' ) {
+if ($DBMS == 'MySQL') {
 	$database_type_name = "MySQL/MariaDB";
-} elseif($DBMS == 'PGSQL') {
+} elseif ($DBMS == 'PGSQL') {
 	$database_type_name = "PostgreSQL";
 }
 
@@ -47,16 +45,16 @@ $git_ref = "<em>Unknown</em><br><br>";
 $mod_rewrite = "<em>Unknown</em><br>";
 
 if (PHP_OS == "Linux") {
-	if (is_dir (".git")) {
-		$git_log = shell_exec ("git -c 'safe.directory=*' log -1");
-		if (!is_null ($git_log)) {
-			$tmp = explode ("\n", $git_log);
-			$date = str_replace ("Date: ", "Date: <em>", $tmp[2]);
-			$git_ref = "<ul><li>" . str_replace ("commit ", "Git reference: <em>", $tmp[0]) . "</em></li><li>" . $date . "</em></li></ul>";
+	if (is_dir(".git")) {
+		$git_log = shell_exec("git -c 'safe.directory=*' log -1");
+		if (!is_null($git_log)) {
+			$tmp = explode("\n", $git_log);
+			$date = str_replace("Date: ", "Date: <em>", $tmp[2]);
+			$git_ref = "<ul><li>" . str_replace("commit ", "Git reference: <em>", $tmp[0]) . "</em></li><li>" . $date . "</em></li></ul>";
 		}
 	}
 
-	$out = shell_exec ("apachectl -M | grep rewrite_module");
+	$out = shell_exec("apachectl -M | grep rewrite_module");
 	if ($out == "") {
 		$mod_rewrite = "<em><span class='failure'>Not Enabled</span></em><br>";
 	} else {
@@ -64,11 +62,11 @@ if (PHP_OS == "Linux") {
 	}
 }
 
-if (!is_dir ("./vulnerabilities/api/vendor")) {
-	$vendor = "<em><span class='failure'>Not Installed</span></em><br><br>";
-	$vendor .= "For information on how to install these, see the <a href='https://github.com/digininja/DVWA/blob/master/README.md#vendor-files'>README</a>.<br>";
+if (!is_dir("./vulnerabilities/api/vendor")) {
+	$vendor = "<em><span class='failure'>No instalado</span></em><br><br>";
+	// $vendor .= "For information on how to install these, see the <a href='https://github.com/digininja/DVWA/blob/master/README.md#vendor-files'>README</a>.<br>";
 } else {
-	$vendor = "<em><span class='success'>Installed</span></em><br>";
+	$vendor = "<em><span class='success'>Instalado</span></em><br>";
 }
 
 $phpVersionWarning = "";
@@ -79,12 +77,12 @@ if (version_compare(phpversion(), '6', '<')) {
 	$phpVersionWarning = "<span class=\"failure\">Versions of PHP below 7.3 may work but have known problems, please upgrade.</span><br /><br />";
 }
 
-$page[ 'body' ] .= "
+$page['body'] .= "
 <div class=\"body_padded\">
-	<h1>Database Setup <img src=\"" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/images/spanner.png\" /></h1>
+	<h1>Database Setup <img src=\"" . DVWA_WEB_PAGE_TO_ROOT . "mmva/images/spanner.png\" /></h1>
 
 	<p>Click on the 'Create / Reset Database' button below to create or reset your database.<br />
-	If you get an error make sure you have the correct user credentials in: <em>" . realpath(  getcwd() . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "config.inc.php" ) . "</em></p>
+	If you get an error make sure you have the correct user credentials in: <em>" . realpath(getcwd() . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "config.inc.php") . "</em></p>
 
 	<p>If the database already exists, <em>it will be cleared and the data will be reset</em>.<br />
 	You can also use this to reset the administrator credentials (\"<em>admin</em> // <em>password</em>\") at any stage.</p>
@@ -151,6 +149,6 @@ allow_url_include = On</code></pre>
 	<hr />
 </div>";
 
-dvwaHtmlEcho( $page );
+dvwaHtmlEcho($page);
 
 ?>
