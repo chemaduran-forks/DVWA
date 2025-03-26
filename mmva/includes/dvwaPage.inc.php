@@ -399,11 +399,11 @@ function dvwaHtmlEcho($pPage)
 
 		<title>{$pPage['title']}</title>
 
-		<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/css/main.css\" />
+		<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "mmva/css/main.css\" />
 
 		<link rel=\"icon\" type=\"\image/ico\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "favicon.ico\" />
 
-		<script type=\"text/javascript\" src=\"" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/js/dvwaPage.js\"></script>
+		<script type=\"text/javascript\" src=\"" . DVWA_WEB_PAGE_TO_ROOT . "mmva/js/dvwaPage.js\"></script>
 
 	</head>
 
@@ -412,7 +412,7 @@ function dvwaHtmlEcho($pPage)
 
 			<div id=\"header\">
 
-				<img src=\"" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/images/logo.png\" alt=\"MMVWA\" />
+				<img src=\"" . DVWA_WEB_PAGE_TO_ROOT . "mmva/images/logo.png\" alt=\"MMVWA\" />
 
 			</div>
 
@@ -441,7 +441,7 @@ function dvwaHtmlEcho($pPage)
 
 			<div id=\"footer\">
 
-				<script src='" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/js/add_event_listeners.js'></script>
+				<script src='" . DVWA_WEB_PAGE_TO_ROOT . "mmva/js/add_event_listeners.js'></script>
 
 			</div>
 
@@ -470,7 +470,7 @@ function dvwaHelpHtmlEcho($pPage)
 
 		<title>{$pPage['title']}</title>
 
-		<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/css/help.css\" />
+		<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "mmva/css/help.css\" />
 
 		<link rel=\"icon\" type=\"\image/ico\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "favicon.ico\" />
 
@@ -507,7 +507,7 @@ function dvwaSourceHtmlEcho($pPage)
 
 		<title>{$pPage['title']}</title>
 
-		<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/css/source.css\" />
+		<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "mmva/css/source.css\" />
 
 		<link rel=\"icon\" type=\"\image/ico\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "favicon.ico\" />
 
